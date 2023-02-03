@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		184CE362298CE8010064D3A0 /* PasswordField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184CE361298CE8000064D3A0 /* PasswordField.swift */; };
+		184CE365298CF62C0064D3A0 /* TextFieldClearButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184CE364298CF62C0064D3A0 /* TextFieldClearButton.swift */; };
 		18A35EE2298A2FA000473E23 /* CoreDataLoginApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A35EE1298A2FA000473E23 /* CoreDataLoginApp.swift */; };
 		18A35EE4298A2FA000473E23 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A35EE3298A2FA000473E23 /* SignUpView.swift */; };
 		18A35EE6298A2FA200473E23 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18A35EE5298A2FA200473E23 /* Assets.xcassets */; };
@@ -23,6 +25,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		184CE361298CE8000064D3A0 /* PasswordField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordField.swift; sourceTree = "<group>"; };
+		184CE364298CF62C0064D3A0 /* TextFieldClearButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldClearButton.swift; sourceTree = "<group>"; };
 		18A35EDE298A2FA000473E23 /* CoreDataLogin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoreDataLogin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18A35EE1298A2FA000473E23 /* CoreDataLoginApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataLoginApp.swift; sourceTree = "<group>"; };
 		18A35EE3298A2FA000473E23 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
@@ -50,6 +54,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		184CE360298CE7D40064D3A0 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				184CE361298CE8000064D3A0 /* PasswordField.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		184CE363298CF5F50064D3A0 /* ViewModifier */ = {
+			isa = PBXGroup;
+			children = (
+				184CE364298CF62C0064D3A0 /* TextFieldClearButton.swift */,
+			);
+			path = ViewModifier;
+			sourceTree = "<group>";
+		};
 		18A35ED5298A2FA000473E23 = {
 			isa = PBXGroup;
 			children = (
@@ -70,6 +90,7 @@
 			isa = PBXGroup;
 			children = (
 				18A35EE1298A2FA000473E23 /* CoreDataLoginApp.swift */,
+				184CE363298CF5F50064D3A0 /* ViewModifier */,
 				18B6621D298BD3D600072BD8 /* SignUp */,
 				18B6621E298BD40F00072BD8 /* Login */,
 				18B66220298BD48200072BD8 /* DashBoardView */,
@@ -122,6 +143,7 @@
 			children = (
 				18A35F2D298A965300473E23 /* DashboardView.swift */,
 				18B66221298BD53800072BD8 /* SideMenu */,
+				184CE360298CE7D40064D3A0 /* Views */,
 			);
 			path = DashBoardView;
 			sourceTree = "<group>";
@@ -205,6 +227,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				18A35F2C298A8F0D00473E23 /* TodoItem.swift in Sources */,
+				184CE362298CE8010064D3A0 /* PasswordField.swift in Sources */,
 				18B66225298BD5C700072BD8 /* ProgressLoader.swift in Sources */,
 				18A35F2E298A965300473E23 /* DashboardView.swift in Sources */,
 				18B66227298BD5FD00072BD8 /* Extention + UserDefault.swift in Sources */,
@@ -212,6 +235,7 @@
 				18A35F2A298A8ED900473E23 /* DataManager.swift in Sources */,
 				18A35EE4298A2FA000473E23 /* SignUpView.swift in Sources */,
 				18A35F28298A8E7B00473E23 /* Model.xcdatamodeld in Sources */,
+				184CE365298CF62C0064D3A0 /* TextFieldClearButton.swift in Sources */,
 				18B66223298BD57000072BD8 /* SideMenuView.swift in Sources */,
 				18A35EF5298A3EC400473E23 /* LoginViewModel.swift in Sources */,
 				18A35EE2298A2FA000473E23 /* CoreDataLoginApp.swift in Sources */,

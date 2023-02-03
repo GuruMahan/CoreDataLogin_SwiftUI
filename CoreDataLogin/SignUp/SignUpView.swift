@@ -29,144 +29,65 @@ struct SignUpView: View {
     @ObservedObject var viewModel = LoginViewModel()
    
     var body: some View {
-       
+           ZStack {
       
-                
-                ZStack {
-        //            Color.blue
-                    LinearGradient(colors: [Color(hex: "1A7BDC"), Color(hex: "56B8FF")], startPoint: .leading, endPoint: .trailing)
+               LinearGradient(colors: [Color(hex: "1A7BDC").opacity(0.85), Color(hex: "56B8FF").opacity(0.85)], startPoint: .leading, endPoint: .trailing)
                         .ignoresSafeArea()
                     
                     VStack {
-                        
-                        VStack {
-                            HStack{
+                           HStack{
                                 
-                                Image(systemName: "globe")
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(width: 40,height: 50,alignment: .center)
-                                    .foregroundColor(Color.white)
-                                
+                                Image("digiClassIconWhite")
                                 Text("DigiClass")
-                                    .foregroundColor(Color.white)
+                                    .font(.title)
                                     .fontWeight(.bold)
+                                    .foregroundColor(Color.white)
                             }
                             bodyView
-                                .frame(width: 380, height: UIScreen.main.bounds.height - 350)
-                                .background(Color.white)
-                                .cornerRadius(10)
-                              
-                        }
-                        Spacer()
+                            .background(Color.white)
+                            .cornerRadius(8)
+                            .shadow(color: Color(hex: "111827").opacity(0.4),
+                                    radius: 2, x: 1, y: 1)
+                            .padding(15)
                     }
                 }
             }
             
             @ViewBuilder var bodyView: some View{
                 
-                VStack(alignment:.center){
+                VStack{
                     Text("Sign Up")
-                        .font(.system(size: 20))
+                        .foregroundColor(Color(hex: "666666"))
+                        .font(Font.custom("Roboto-Medium", size: 18))
                         .padding()
-                    VStack(alignment:.leading){
-                        Text("Email")
-                            .font(.system(.subheadline))
-        //                    .padding(.leading,-13)
-                        VStack(alignment: .leading,spacing: 0){
-                            TextField("  Enter Email Id", text: $emailText)
-                                .font(.system(.subheadline))
-                                .frame(maxWidth: .infinity,maxHeight: 40,alignment: .leading)
-                                .overlay(RoundedRectangle(cornerRadius:5)
-                                    .stroke(Color.gray,lineWidth: 2)
-                                )
-                            
-                            if showEmailFormat{
-                                displayAlertMessage(userMessage:"Invalid Format" )
-                                       .font(.system(size: 16))
-                                       .foregroundColor(.red)
-                            }
-                            if showEnterYourEmail{
-                                displayAlertMessage(userMessage: "Enter  Email" )
-                                    .font(.system(size: 16))
-                                    .foregroundColor(.red)
-                            }
-                        }
-                        
-                        Text(
-                            "PassWord")
-                        .font(.system(.subheadline))
-        //                .padding()
-                        .padding(2)
-                        VStack(alignment: .leading,spacing: 0){
-                            TextField("  Enter PassWord", text: $passWordText)
-                                .font(.system(.subheadline))
-                                .frame(maxWidth: .infinity,maxHeight: 40)
-                                .overlay(RoundedRectangle(cornerRadius:5).stroke(Color.gray,lineWidth: 2))
-                          
-                         if showPasswordFormat{
-                             displayAlertMessage(userMessage:"Invalid Format" )
-                                    .font(.system(size: 16))
-                                    .foregroundColor(.red)
-                         }
-                            if showEnterYourPassword{
-                                displayAlertMessage(userMessage: "Enter Password" )
-                                       .font(.system(size: 16))
-                                       .foregroundColor(.red)
-                            }
-                        }
-                        
-                        
-                        Text(
-                            "Confirm PassWord")
-                        .font(.system(.subheadline))
-        //                .padding()
-                        .padding(2)
-                        VStack(alignment: .leading,spacing: 0){
-                            TextField("  Enter ConfirmPassWord", text: $confirmPassWordText)
-                                .font(.system(.subheadline))
-                                .frame(maxWidth: .infinity,maxHeight: 40)
-                            
-                                .overlay(RoundedRectangle(cornerRadius:5).stroke(Color.gray,lineWidth: 2))
-                            
-                            if showEnterConfirmPasswordFormat{
-                                displayAlertMessage(userMessage:"Invalid Format" )
-                                       .font(.system(size: 16))
-                                       .foregroundColor(.red)
-                            }
-                               if showEnterConfirmPassword{
-                                   displayAlertMessage(userMessage: "Enter confirmPassword" )
-                                          .font(.system(size: 16))
-                                          .foregroundColor(.red)
-                               }
-                            
-                        }
-                        
-                    }
-                    .padding(10)
+
+                    textFieldPanel
                     
                     ZStack{
                         Button {
                            
                             check()
                         } label: {
-                            Text("Sing up")
-                              
-                                .frame(width: 240,height:40)
-                                .foregroundColor(.white)
-                                .background(.blue)
-                                .cornerRadius(5)
-                                .padding(.horizontal,40)
+                            Text("Sing Up")
+                                .font(Font.custom("Roboto-Medium", size: 16))
+                                .foregroundColor(Color.white)
+                                .frame(width: 296, height: 40)
+                                .padding([.trailing,.leading], 16.0)
+                                .background(Color(hex: "147AFC"))
+                                .cornerRadius(4)
                         }
                         if showPasswordDonotMatch{
                             displayAlertMessage(userMessage: "Password Don't Match")
-                                .frame(width: 240,height: 40)
+                                .font(Font.custom("Roboto-Medium", size: 16))
                                 .foregroundColor(.red)
+                                .frame(width: 296, height: 40)
+                                .padding([.trailing,.leading], 16.0)
                                 .background(Color.white)
-                                .cornerRadius(5)
+                                .cornerRadius(4)
+
                         }
                     }
-                    Divider()
+                    Divider().padding()
                     Text("Already have an account?")
                     .padding(2)
                 Button {
@@ -175,14 +96,97 @@ struct SignUpView: View {
                     }
                 } label: {
                     Text("Login")
+                }.padding()
+             
                 }
-                Spacer()
-                }
-                .padding()
+               
             }
+    
+    @ViewBuilder var textFieldPanel: some View {
+        VStack(alignment:.leading,spacing: 0){
+            VStack(alignment: .leading){
+            Text("Email")
+                .foregroundColor(Color(hex: "6B7280"))
+                .font(Font.custom("Roboto-Regular", size: 14))
+           
+                TextField("Enter Email Id", text: $emailText)
+                    .autocapitalization(.none)
+                    .clearTextFieldText(text: $emailText)
+                        .font(Font.custom("Roboto-Regular", size: 16))
+                        .padding()
+                        .frame(height: 48)
+                        .background(RoundedRectangle(cornerRadius: 5).stroke(Color(hex: "D1D5DB")))
+                EmailErrorMessage
+             
+            }.padding()
+            
+            VStack(alignment: .leading){
+            Text(
+                "PassWord")
+            .foregroundColor(Color(hex: "6B7280"))
+            .font(Font.custom("Roboto-Regular", size: 14))
+
+          PasswordField(password: $passWordText)
+            PasswordErrorMessage
+            } .padding()
+            
+            VStack(alignment: .leading){
+            Text(
+                "Confirm PassWord")
+            .foregroundColor(Color(hex: "6B7280"))
+            .font(Font.custom("Roboto-Regular", size: 14))
+          
+          
+                TextField("Enter ConfirmPassWord", text: $confirmPassWordText)
+                    .autocapitalization(.none)
+                    .clearTextFieldText(text: $emailText)
+                        .font(Font.custom("Roboto-Regular", size: 16))
+                        .padding()
+                        .frame(height: 48)
+                        .background(RoundedRectangle(cornerRadius: 5).stroke(Color(hex: "D1D5DB")))
+                confirmPasswordErrorMessage
+               
+                
+            }.padding()
+            
+        }
+    }
+    @ViewBuilder var EmailErrorMessage: some View {
+        if showEmailFormat{
+            displayAlertMessage(userMessage:"Invalid Format" )
+               
+        }
+        if showEnterYourEmail{
+            displayAlertMessage(userMessage: "Enter  Email" )
+             
+        }
+    }
+    @ViewBuilder var PasswordErrorMessage: some View {
+        if showPasswordFormat{
+            displayAlertMessage(userMessage:"Invalid Format" )
+                
+        }
+           if showEnterYourPassword{
+               displayAlertMessage(userMessage: "Enter Password" )
+                 
+           }
+       
+    }
+    @ViewBuilder var confirmPasswordErrorMessage: some View {
+        if showEnterConfirmPasswordFormat{
+            displayAlertMessage(userMessage:"Invalid Format" )
+                  
+        }
+           if showEnterConfirmPassword{
+               displayAlertMessage(userMessage: "Enter confirmPassword" )
+                   
+           }
+    }
     @ViewBuilder func displayAlertMessage(userMessage:String) -> some View{
            VStack{
                Text("\(userMessage)")
+                   .foregroundColor(Color(UIColor.red.withAlphaComponent(0.75)))
+                   .font(Font.custom("Roboto-Regular", size: 14))
            }
        }
     private func addItem() {

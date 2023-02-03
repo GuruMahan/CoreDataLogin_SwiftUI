@@ -45,33 +45,31 @@ struct LoginView: View {
                     EmptyView()
                 }
                 //            Color.blue
-                LinearGradient(colors: [Color(hex: "1A7BDC"), Color(hex: "56B8FF")], startPoint: .leading, endPoint: .trailing)
-                    .ignoresSafeArea()
+                LinearGradient(colors: [Color(hex: "1A7BDC").opacity(0.85), Color(hex: "56B8FF").opacity(0.85)], startPoint: .leading, endPoint: .trailing)
+                    .edgesIgnoringSafeArea(.all)
                 
                 VStack {
                     
-                    VStack {
+                  
                         HStack{
                             
-                            Image(systemName: "globe")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 40,height: 50,alignment: .center)
-                                .foregroundColor(Color.white)
+                            Image("digiClassIconWhite")
                             
                             Text("DigiClass")
-                                .foregroundColor(Color.white)
+                                .font(.title)
                                 .fontWeight(.bold)
+                                .foregroundColor(Color.white)
                         }
+                    VStack{
                         bodyView
-                            .frame(maxWidth: .infinity,maxHeight: UIScreen.main.bounds.height / 2)
-                            
-                            .background(Color.white)
-                            .cornerRadius(10)
-                            .padding(5)
-                        
                     }
-                    Spacer()
+                    .background(Color.white)
+                    .cornerRadius(8)
+                    .shadow(color: Color(hex: "111827").opacity(0.4),
+                            radius: 2, x: 1, y: 1)
+                    .padding()
+                        
+                   
                 }
             }
         }.navigationBarBackButtonHidden(true)
@@ -79,110 +77,144 @@ struct LoginView: View {
 
     @ViewBuilder var bodyView: some View{
         
-        VStack(alignment:.center){
+        VStack{
             Text("Login")
-                .font(.system(size: 20))
+                .foregroundColor(Color(hex: "666666"))
+                .font(Font.custom("Roboto-Medium", size: 18))
                 .padding()
-            VStack(alignment:.leading){
-                
-                Text("Email")
-                    .font(.system(.subheadline))
-                //                    .padding(.leading,-13)
-                VStack(alignment: .leading, spacing:0){
-                    TextField("  Enter Email Id", text: $emailText)
-                        .font(.system(.subheadline))
-                        .frame(maxWidth: .infinity,maxHeight: 40,alignment: .leading)
-                        .overlay(RoundedRectangle(cornerRadius:5)
-                            .stroke(Color.gray,lineWidth: 2)
-                        )
-                        if showEmailValidationErrorLabel{
-                           
-                            Text("Invalid EMail")
-                                .font(.system(size: 16))
-                                .foregroundColor(.red)
-                     }
-                    if showEmailFormat{
-                        displayAlertMessage(userMessage:"Invalid Format" )
-                               .font(.system(size: 16))
-                               .foregroundColor(.red)
-                    }
-                    if showEnterYourEmail{
-                        displayAlertMessage(userMessage: "Enter Your Email" )
-                            .font(.system(size: 16))
-                            .foregroundColor(.red)
-                    }
-                }
-               
-                Text(
-                    "PassWord")
-                .font(.system(.subheadline))
-                //                .padding()
-                .padding(2)
-                VStack(alignment: .leading, spacing:0){
-                    TextField("  Enter PassWord", text: $passWordText)
-                        .font(.system(.subheadline))
-                        .frame(maxWidth: .infinity,maxHeight: 40,alignment: .leading)
-                        .overlay(RoundedRectangle(cornerRadius:5).stroke(Color.gray,lineWidth: 2))
-                    
-                    if showPasswordValidationText{
-                       displayAlertMessage(userMessage:"Invalid Password" )
-                            .font(.system(size: 16))
-                            .foregroundColor(.red)
-                 }
-                 if showPasswordFormat{
-                     displayAlertMessage(userMessage:"Invalid Format" )
-                            .font(.system(size: 16))
-                            .foregroundColor(.red)
-                 }
-                    if showEnterYourPassword{
-                        displayAlertMessage(userMessage: "Enter Your Password" )
-                               .font(.system(size: 16))
-                               .foregroundColor(.red)
-                    }
-                    
-            }
-        }
-            .padding(10)
-            
-            Button {
-                
-         
-              
-              //  if !emailText.isEmpty && !passWordText.isEmpty{
+
+            textFieldPanel
+            ZStack{
+                Button {
                     check()
-             //   }
-            } label: {
-                Text("Login")
-                
-                    .frame(width: 240,height:40)
-                    .foregroundColor(.white)
-                    .background(.blue)
-                    .cornerRadius(5)
-                    .padding(.horizontal,40)
+                } label: {
+                    Text("Login")
+                        .font(Font.custom("Roboto-Medium", size: 16))
+                        .foregroundColor(Color.white)
+                        .frame(width: 296, height: 40)
+                        .padding([.trailing,.leading], 16.0)
+                        .background(Color(hex: "147AFC"))
+                        .cornerRadius(4)
+                }
+                if showDonotHaveAccount{
+                    displayAlertMessage(userMessage:"Don't Have Account")
+                        .font(Font.custom("Roboto-Medium", size: 16))
+                        .foregroundColor(.red)
+                        .frame(width: 296, height: 40)
+                        .padding([.trailing,.leading], 16.0)
+                        .background(Color.white)
+                        .cornerRadius(4)
+                }
             }
-         Divider()
+            buttonForgotPassword
             
+            Divider().padding()
+            Text("Don't have an account yet?")
+                .foregroundColor(Color(hex: "4B5563"))
+                .font(Font.custom("Roboto-Regular", size: 18))
             Button {
                moveToSignUpView = true
             } label: {
-                Text("SignUp")
+                Text("Sign Up")
+                    .foregroundColor(Color(hex: "147AFC"))
+                    .font(Font.custom("Roboto-Medium", size: 16))
+                    .foregroundColor(Color.blue)
+                    .padding()
             }
-            if showDonotHaveAccount{
-                displayAlertMessage(userMessage:"Don't Have Account")
-                    .frame(width: 240,height: 40)
-                    .foregroundColor(.red)
-                    .background(Color.gray.opacity(0.3))
-                    .cornerRadius(10)
-            }
+          
+
         }
-        .padding()
+       
     }
     
+    @ViewBuilder var buttonForgotPassword: some View {
+        Button(action: {
+         
+        }, label: {
+            Text("Forgot Password?")
+                .foregroundColor(Color(hex: "147AFC"))
+                .font(Font.custom("Roboto-Medium", size: 16))
+                .foregroundColor(Color.blue)
+                .padding(EdgeInsets(top: 10,
+                                    leading: 10,
+                                    bottom: 0,
+                                    trailing: 10))
+        })
+        
+    }
+    
+    @ViewBuilder var textFieldPanel: some View {
+        VStack(alignment:.leading){
+            VStack(alignment: .leading){
+                Text("Email")
+                    .foregroundColor(Color(hex: "6B7280"))
+                    .font(Font.custom("Roboto-Regular", size: 14))
+                                  
+              
+                    TextField("Enter Email Id", text: $emailText)
+                        .autocapitalization(.none)
+                        .clearTextFieldText(text: $emailText)
+                            .font(Font.custom("Roboto-Regular", size: 16))
+                            .padding()
+                            .frame(height: 48)
+                            .background(RoundedRectangle(cornerRadius: 5).stroke(Color(hex: "D1D5DB")))
+                    emailShowAlertText()
+             
+               
+            }.padding()
+
+            VStack(alignment: .leading){
+                Text(
+                    "PassWord")
+                .foregroundColor(Color(hex: "6B7280"))
+                .font(Font.custom("Roboto-Regular", size: 14))
+
+                PasswordField(password: $passWordText)
+                
+                  passwordShowAlertText()
+              
+            }.padding()
+
+        }
+    }
     @ViewBuilder func displayAlertMessage(userMessage:String) -> some View{
            VStack{
                Text("\(userMessage)")
+                   .foregroundColor(Color(UIColor.red.withAlphaComponent(0.75)))
+                   .font(Font.custom("Roboto-Regular", size: 14))
            }
        }
+    @ViewBuilder func emailShowAlertText() -> some View{
+        if showEmailValidationErrorLabel{
+            
+            Text("Invalid EMail")
+              
+        }
+        if showEmailFormat{
+            displayAlertMessage(userMessage:"Invalid Format" )
+               
+        }
+        if showEnterYourEmail{
+            displayAlertMessage(userMessage: "Enter Your Email" )
+            
+        }
+    }
+        @ViewBuilder func passwordShowAlertText() -> some View{
+            
+            if showPasswordValidationText{
+               displayAlertMessage(userMessage:"Invalid Password" )
+                
+         }
+         if showPasswordFormat{
+             displayAlertMessage(userMessage:"Invalid Format" )
+                   
+         }
+            if showEnterYourPassword{
+                displayAlertMessage(userMessage: "Enter Your Password" )
+                   
+            }
+        }
+    
     
     func check(){
         
@@ -204,20 +236,7 @@ struct LoginView: View {
                     showEmailValidationErrorLabel = false
                     showEmailFormat = false
                 }
-                
-                if todoItems.filter({$0.email == emailText}).isEmpty{
-                    
-                    withAnimation {
-                        showDonotHaveAccount = true
-                    }
-                 
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 3){
-                        withAnimation {
-                            showDonotHaveAccount = false
-                        }
-                       
-                    }
-               }
+          
             }
         }
 
@@ -250,7 +269,7 @@ struct LoginView: View {
                         showDonotHaveAccount = true
                     }
                  
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 3){
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.5){
                         withAnimation {
                             showDonotHaveAccount = false
                         }
@@ -269,9 +288,13 @@ struct LoginView: View {
         }
        
     }
+
 }
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
         LoginView()
     }
 }
+
+
+
