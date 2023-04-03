@@ -15,7 +15,6 @@ struct SideMenuView: View {
         @State var signOutApp = false
     var body: some View {
        ZStack{
-            
              ZStack {
                  NavigationLink(isActive: $signOutApp) {
                      LoginView()
@@ -44,14 +43,11 @@ struct SideMenuView: View {
                 .offset(x: isMenuVisible ? 0: -menuWidth)
                 .animation(.default)
                 Spacer()
-                
             }
-            
         }
     }
         }
        
-        
         @ViewBuilder var profileView: some View{
             VStack{
                 HStack(alignment: .center){
@@ -70,7 +66,6 @@ struct SideMenuView: View {
                     }
                     userSummaryView
                     Spacer()
-     
                 }
                 HStack{
                     if isUserInfoShow{
@@ -115,7 +110,6 @@ struct SideMenuView: View {
                     .foregroundColor(.white)
                 Text("EMAIL")
                     .foregroundColor(.white)
-               // Text(viewModel.emailId)
             }
             .font(.system(size: 14))
         }
@@ -194,7 +188,6 @@ struct SideMenuView: View {
                             if signOutApp{
                                 UserDefaults.standard.set(false, forKey: "islogin")
                             }
-                     
                         } label: {
                             Text("Sign Out")
                                 .font(.system(size: 17, weight: .semibold))
@@ -209,7 +202,6 @@ struct SideMenuView: View {
                 }
             }
         }
-    
 }
 
 struct SideMenuView_Previews: PreviewProvider {

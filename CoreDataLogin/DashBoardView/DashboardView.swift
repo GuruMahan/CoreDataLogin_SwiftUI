@@ -11,14 +11,13 @@ struct DashboardView: View {
    
     @State var isLoaderShown = false
     @State var  showLeftMenu = false
+    
     var body: some View {
         NavigationView{
             ZStack {
                 dashBoardView
           SideMenuView(isMenuVisible: $showLeftMenu)
-                
                 Spacer()
-                
             }
             .onAppear{
                 isLoaderShown = true
@@ -27,8 +26,8 @@ struct DashboardView: View {
                 }
             }
         }.navigationBarBackButtonHidden(true)
-        
     }
+    
     @ViewBuilder var dashBoardView: some View{
         VStack(spacing:0){
             Color.blue
@@ -40,7 +39,6 @@ struct DashboardView: View {
         .loader(isShown: $isLoaderShown)
     }
    
-
     @ViewBuilder var headerView: some View{
         ZStack{
             Text("Dashboard")
@@ -49,7 +47,6 @@ struct DashboardView: View {
                     withAnimation {
                         DispatchQueue.main.async {
                            showLeftMenu = true
-                          
                         }
                     }
                 } label: {
@@ -57,14 +54,12 @@ struct DashboardView: View {
                         .font(.system(size: 30))
                 }
               Spacer()
-                   
             }
         }
         .padding()
             .foregroundColor(.white)
             .frame(height: 55)
             .background(Color.blue)
-
     }
     
 }

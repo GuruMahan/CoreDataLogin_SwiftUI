@@ -8,12 +8,10 @@
 import SwiftUI
 
 struct LoginView: View {
+    
     @Environment(\.presentationMode) var presentationMode
-  //  @EnvironmentObject var manager: DataManager
     @Environment(\.managedObjectContext) private var viewContext
     @FetchRequest(sortDescriptors: []) private var todoItems: FetchedResults<Todo>
-  
-  
     @State var emailText:String = ""
     @State var passWordText:String = ""
     @State var isSuccess = false
@@ -26,14 +24,11 @@ struct LoginView: View {
     @State var showEnterYourEmail = false
     @State var showEnterYourPassword = false
     @State var showDonotHaveAccount = false
-     @StateObject var viewModel = LoginViewModel()
+    @StateObject var viewModel = LoginViewModel()
+    
     var body: some View {
-        
         NavigationView {
-            
-           
             ZStack {
-               
                 NavigationLink(isActive: $moveToSignUpView) {
                     SignUpView()
                 } label: {
@@ -44,22 +39,16 @@ struct LoginView: View {
                 } label: {
                     EmptyView()
                 }
-                //            Color.blue
                 LinearGradient(colors: [Color(hex: "1A7BDC").opacity(0.85), Color(hex: "56B8FF").opacity(0.85)], startPoint: .leading, endPoint: .trailing)
                     .edgesIgnoringSafeArea(.all)
-                
                 VStack {
-                    
-                  
-                        HStack{
-                            
-                            Image("digiClassIconWhite")
-                            
-                            Text("DigiClass")
-                                .font(.title)
-                                .fontWeight(.bold)
-                                .foregroundColor(Color.white)
-                        }
+                    HStack{
+                        Image("digiClassIconWhite")
+                        Text("DigiClass")
+                            .font(.title)
+                            .fontWeight(.bold)
+                            .foregroundColor(Color.white)
+                    }
                     VStack{
                         bodyView
                     }
@@ -68,21 +57,17 @@ struct LoginView: View {
                     .shadow(color: Color(hex: "111827").opacity(0.4),
                             radius: 2, x: 1, y: 1)
                     .padding()
-                        
-                   
                 }
             }
         }.navigationBarBackButtonHidden(true)
     }
-
+    
     @ViewBuilder var bodyView: some View{
-        
         VStack{
             Text("Login")
                 .foregroundColor(Color(hex: "666666"))
                 .font(Font.custom("Roboto-Medium", size: 18))
                 .padding()
-
             textFieldPanel
             ZStack{
                 Button {
@@ -107,13 +92,12 @@ struct LoginView: View {
                 }
             }
             buttonForgotPassword
-            
             Divider().padding()
             Text("Don't have an account yet?")
                 .foregroundColor(Color(hex: "4B5563"))
                 .font(Font.custom("Roboto-Regular", size: 18))
             Button {
-               moveToSignUpView = true
+                moveToSignUpView = true
             } label: {
                 Text("Sign Up")
                     .foregroundColor(Color(hex: "147AFC"))
@@ -121,15 +105,11 @@ struct LoginView: View {
                     .foregroundColor(Color.blue)
                     .padding()
             }
-          
-
         }
-       
     }
     
     @ViewBuilder var buttonForgotPassword: some View {
         Button(action: {
-         
         }, label: {
             Text("Forgot Password?")
                 .foregroundColor(Color(hex: "147AFC"))
@@ -140,7 +120,6 @@ struct LoginView: View {
                                     bottom: 0,
                                     trailing: 10))
         })
-        
     }
     
     @ViewBuilder var textFieldPanel: some View {
@@ -149,75 +128,59 @@ struct LoginView: View {
                 Text("Email")
                     .foregroundColor(Color(hex: "6B7280"))
                     .font(Font.custom("Roboto-Regular", size: 14))
-                                  
-              
-                    TextField("Enter Email Id", text: $emailText)
-                        .autocapitalization(.none)
-                        .clearTextFieldText(text: $emailText)
-                            .font(Font.custom("Roboto-Regular", size: 16))
-                            .padding()
-                            .frame(height: 48)
-                            .background(RoundedRectangle(cornerRadius: 5).stroke(Color(hex: "D1D5DB")))
-                    emailShowAlertText()
-             
-               
+                TextField("Enter Email Id", text: $emailText)
+                    .autocapitalization(.none)
+                    .clearTextFieldText(text: $emailText)
+                    .font(Font.custom("Roboto-Regular", size: 16))
+                    .padding()
+                    .frame(height: 48)
+                    .background(RoundedRectangle(cornerRadius: 5).stroke(Color(hex: "D1D5DB")))
+                emailShowAlertText()
             }.padding()
-
             VStack(alignment: .leading){
                 Text(
                     "PassWord")
                 .foregroundColor(Color(hex: "6B7280"))
                 .font(Font.custom("Roboto-Regular", size: 14))
-
                 PasswordField(password: $passWordText)
-                
-                  passwordShowAlertText()
-              
+                passwordShowAlertText()
             }.padding()
-
         }
     }
+    
     @ViewBuilder func displayAlertMessage(userMessage:String) -> some View{
-           VStack{
-               Text("\(userMessage)")
-                   .foregroundColor(Color(UIColor.red.withAlphaComponent(0.75)))
-                   .font(Font.custom("Roboto-Regular", size: 14))
-           }
-       }
+        VStack{
+            Text("\(userMessage)")
+                .foregroundColor(Color(UIColor.red.withAlphaComponent(0.75)))
+                .font(Font.custom("Roboto-Regular", size: 14))
+        }
+    }
+    
     @ViewBuilder func emailShowAlertText() -> some View{
         if showEmailValidationErrorLabel{
-            
             Text("Invalid EMail")
-              
         }
         if showEmailFormat{
             displayAlertMessage(userMessage:"Invalid Format" )
-               
         }
         if showEnterYourEmail{
             displayAlertMessage(userMessage: "Enter Your Email" )
-            
         }
     }
-        @ViewBuilder func passwordShowAlertText() -> some View{
-            
-            if showPasswordValidationText{
-               displayAlertMessage(userMessage:"Invalid Password" )
-                
-         }
-         if showPasswordFormat{
-             displayAlertMessage(userMessage:"Invalid Format" )
-                   
-         }
-            if showEnterYourPassword{
-                displayAlertMessage(userMessage: "Enter Your Password" )
-                   
-            }
-        }
     
+    @ViewBuilder func passwordShowAlertText() -> some View{
+        if showPasswordValidationText{
+            displayAlertMessage(userMessage:"Invalid Password" )
+        }
+        if showPasswordFormat{
+            displayAlertMessage(userMessage:"Invalid Format" )
+        }
+        if showEnterYourPassword{
+            displayAlertMessage(userMessage: "Enter Your Password" )
+        }
+    }
     
     func check(){
-        
         if emailText.isEmpty{
             withAnimation {
                 showEnterYourEmail = true
@@ -227,31 +190,24 @@ struct LoginView: View {
             if !viewModel.isValidEmail(testStr: emailText){
                 withAnimation {
                     showEmailFormat = true
-                   showEmailValidationErrorLabel = false
-                  //  showEnterYourEmail = false
+                    showEmailValidationErrorLabel = false
                 }
- 
             }else if viewModel.isValidEmail(testStr: emailText){
                 withAnimation {
                     showEmailValidationErrorLabel = false
                     showEmailFormat = false
                 }
-          
             }
         }
-
-        
         if passWordText.isEmpty{
             withAnimation {
                 showEnterYourPassword = true
-              //  showEmailValidationErrorLabel = false
                 showPasswordValidationText = false
                 showPasswordFormat = false
             }
         }else if !passWordText.isEmpty{
             showEnterYourPassword = false
             if !viewModel.isPasswordValid(passWordText){
-
                 withAnimation {
                     showPasswordValidationText = false
                     showEnterYourPassword = false
@@ -259,24 +215,20 @@ struct LoginView: View {
                 }
             }else if viewModel.isPasswordValid(passWordText){
                 withAnimation {
-                    //  showEmailValidationErrorLabel = false
                     showPasswordValidationText = false
                     showPasswordFormat = false
                 }
                 if  todoItems.filter({$0.passWord == passWordText}).isEmpty{
-                  
                     withAnimation {
                         showDonotHaveAccount = true
                     }
-                 
                     DispatchQueue.main.asyncAfter(deadline: .now() + 1.5){
                         withAnimation {
                             showDonotHaveAccount = false
                         }
                     }
+                }else if let item = todoItems.filter({$0.email == emailText || $0.passWord == passWordText}).first{
                     
-            }else if let item = todoItems.filter({$0.email == emailText || $0.passWord == passWordText}).first{
-                
                     if item.email == emailText
                         && item.passWord == passWordText{
                         isSuccess = true
@@ -284,11 +236,8 @@ struct LoginView: View {
                     }
                 }
             }
-            
         }
-       
     }
-
 }
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {

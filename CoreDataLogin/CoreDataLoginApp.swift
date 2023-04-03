@@ -9,23 +9,21 @@ import SwiftUI
 
 @main
 struct CoreDataLoginApp: App {
-   
-  
     
     @StateObject private var manager: DataManager = DataManager()
- 
+    
     var body: some Scene {
         WindowGroup {
             if UserDefaults.standard.bool(forKey: "islogin"){
                 DashboardView()
                     .environmentObject(manager)
-                      .environment(\.managedObjectContext, manager.container.viewContext)
+                    .environment(\.managedObjectContext, manager.container.viewContext)
             }else{
                 LoginView()
-              .environmentObject(manager)
-                .environment(\.managedObjectContext, manager.container.viewContext)
+                    .environmentObject(manager)
+                    .environment(\.managedObjectContext, manager.container.viewContext)
             }
-               
+            
         }
     }
 }
